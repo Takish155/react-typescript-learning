@@ -1,4 +1,4 @@
-<h1>My Typescript Learning Journey with React files</h1>
+<h1>My Typescript Learning Journey File</h1>
 <p>This is where I practice my Typescript skills for React, from empty React apps for learning purposes into projects built with React and TypeScript.</p>
 
 <h2>File Stracture</h2>
