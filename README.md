@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> 40b94f470e74eca29cdcf01da7c96879d1a6744f
 <h1>My Typescript Learning Journey with React files</h1>
 <p>This is where I practice my Typescript skills for React, from empty React apps for learning purposes into projects built with React and TypeScript.</p>
 
