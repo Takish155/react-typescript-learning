@@ -6,11 +6,12 @@ interface Expenses {
 }
 
 interface Props {
-  expenses: Expenses[];
-  onDelete: (id: number) => void;
+  expenses: Expenses[]; // Accepts a prop that's an array that has objects
+  onDelete: (id: number) => void; // Accepts a function
 }
 
 const ExpenseList = ({ expenses, onDelete }: Props) => {
+  // Will return null if theres no data
   if (expenses.length === 0) {
     return null;
   }
@@ -25,32 +26,38 @@ const ExpenseList = ({ expenses, onDelete }: Props) => {
         </tr>
       </thead>
       <tbody>
-        {expenses.map((expense) => {
-          return (
-            <tr key={expense.id}>
-              <td>{expense.description}</td>
-              <td>${expense.amount}</td>
-              <td>{expense.category}</td>
-              <td>
-                <button
-                  className="btn btn-outline-danger"
-                  onClick={() => onDelete(expense.id)}
-                >
-                  Delete
-                </button>
-              </td>
-            </tr>
-          );
-        })}
+        {
+          // Maps trough expenses array to create table row with data
+          expenses.map((expense) => {
+            return (
+              <tr key={expense.id}>
+                <td>{expense.description}</td>
+                <td>${expense.amount}</td>
+                <td>{expense.category}</td>
+                <td>
+                  <button
+                    className="btn btn-outline-danger"
+                    onClick={() => onDelete(expense.id)}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            );
+          })
+        }
       </tbody>
       <tfoot>
         <tr>
           <td>Total</td>
           <td>
             $
-            {expenses
-              .reduce((acc, expense) => expense.amount + acc, 0)
-              .toFixed(2)}
+            {
+              // Returns the total of expenses
+              expenses
+                .reduce((acc, expense) => expense.amount + acc, 0)
+                .toFixed(2)
+            }
           </td>
           <td></td>
           <td></td>
