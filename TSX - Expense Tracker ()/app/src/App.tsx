@@ -1,15 +1,48 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
+import ExpenseList from "./components/ExpenseList";
+import { ExpenseFilter } from "./components/ExpenseFilter";
+import { ExpenseForm, ExpenseFormData } from "./components/ExpenseForm";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [currentCategory, setCurrentCategory] = useState("");
+  const [expenses, setExpenses] = useState([
+    {
+      id: 1,
+      description: "Why is Typescript so Hard",
+      amount: 10,
+      category: "Utilities",
+    },
+    { id: 2, description: "aaa", amount: 10, category: "Utilities" },
+  ]);
+
+  const onSubmit = (data: ExpenseFormData) => {
+    setExpenses([
+      ...expenses,
+      {
+        id: expenses.length + 1,
+        description: data.description,
+        amount: data.amount,
+        category: data.category,
+      },
+    ]);
+  };
+
+  const visibleExpenses = currentCategory
+    ? expenses.filter((ele) => ele.category === currentCategory)
+    : expenses;
 
   return (
-    <>
-      <h1>HI</h1>
-    </>
+    <main className="w-1/2 mx-auto p-20">
+      <ExpenseForm onSubmit={onSubmit} />
+      <ExpenseFilter
+        onSelectCategory={(category) => setCurrentCategory(category)}
+      />
+      <ExpenseList
+        expenses={visibleExpenses}
+        onDelete={(id) => setExpenses(expenses.filter((ele) => ele.id !== id))}
+      />
+    </main>
   );
 }
 
